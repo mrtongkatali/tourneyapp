@@ -1,0 +1,17 @@
+{
+  "name": "tourneyapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css:build": "npx tailwindcss -i ./Views/Shared/Assets/Styles/Base.css -o ./wwwroot/css/styles.css --minify",
+    "watch": "npx tailwindcss -i ./Views/Shared/Assets/Styles/Base.css -o ./wwwroot/css/styles.css --minify --watch"
+  },
+  "author": "",
+  "license": "ISC"
+}
