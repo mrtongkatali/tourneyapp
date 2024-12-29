@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
 using tourneyapp.Data; // Add this line to import the namespace where ApplicationDbContext is defined
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +10,15 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+
+if (args.Contains("seed:users"))
+{
+    Seeder.SeedUsers(context);
+    Console.WriteLine("Database seeded!");
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -21,6 +28,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseRouting();
 
 app.UseAuthorization();
