@@ -49,9 +49,6 @@ release/
 *.loq
 *.nlog
 
-# Database migrations
-Migrations/
-
 # Publish Outputs
 publish/
 out/
