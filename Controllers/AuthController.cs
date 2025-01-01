@@ -33,7 +33,14 @@ public class AuthController : Controller
     [HttpPost]
     public IActionResult Register(User userModel, string confirmPassword)
     {
-        return View();
+        // if (ModelState.IsValid)
+        // {
+        //     return RedirectToAction("Index");
+        // }
+
+        ModelState.AddModelError("Password", "Password and Confirm Password do not match.");
+
+        return View(userModel);
     }
 
     // 

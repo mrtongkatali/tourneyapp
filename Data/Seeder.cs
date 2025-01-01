@@ -8,15 +8,15 @@ namespace tourneyapp.Data
                 .AddRange(
                     new Models.User
                     {
-                        Email = "test@test.com",
-                        FirstName = "Test",
+                        Email = "user1@demo.com",
+                        FirstName = "One",
                         LastName = "User",
                         Password = "password",
                     },
                     new Models.User
                     {
-                        Email = "test@test.com",
-                        FirstName = "Test",
+                        Email = "user2@demo.com",
+                        FirstName = "Two",
                         LastName = "User",
                         Password = "password",
                     }
