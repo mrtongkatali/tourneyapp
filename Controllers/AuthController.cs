@@ -1,17 +1,15 @@
-using System.Diagnostics;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Mvc;
-using Npgsql;
-using tourneyapp.Data;
 using tourneyapp.Models;
+using tourneyapp.Repositories;
 
 namespace tourneyapp.Controllers;
 public class AuthController : Controller
 {
-    private readonly ApplicationDbContext _context;
-    public AuthController(ApplicationDbContext context)
+    private readonly IUserRepository _userRepository;
+    public AuthController(IUserRepository userRepository)
     {
-        _context = context;
+        _userRepository = userRepository;
     }
     // 
     // GET: /demo/
@@ -31,14 +29,15 @@ public class AuthController : Controller
     }
 
     [HttpPost]
-    public IActionResult Register(User userModel, string confirmPassword)
+    public async Task<IActionResult> Register(User userModel, string confirmPassword)
     {
         // if (ModelState.IsValid)
         // {
         //     return RedirectToAction("Index");
         // }
 
-        ModelState.AddModelError("Password", "Password and Confirm Password do not match.");
+        // ModelState.AddModelError("Password", "Password and Confirm Password do not match.");
+        await _userRepository.Create(userModel, confirmPassword);
 
         return View(userModel);
     }

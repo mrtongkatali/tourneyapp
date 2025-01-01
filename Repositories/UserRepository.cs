@@ -14,7 +14,9 @@ namespace tourneyapp.Repositories
 
         public async Task Create(User user, string confirmPassword)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            await _appDbContext.User.AddAsync(user);
+            await _appDbContext.SaveChangesAsync();
         }
    } 
 }

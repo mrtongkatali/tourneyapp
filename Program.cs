@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using tourneyapp.Data; // Add this line to import the namespace where ApplicationDbContext is defined
+using tourneyapp.Data;
+using tourneyapp.Repositories; // Add this line to import the namespace where ApplicationDbContext is defined
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -7,6 +8,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
