@@ -15,5 +15,14 @@ namespace tourneyapp.Data
         }
 
         public DbSet<User> User { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(e => e.Email)
+                .IsUnique();
+        }
     }
 }
