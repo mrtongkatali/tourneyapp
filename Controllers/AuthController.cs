@@ -36,10 +36,17 @@ public class AuthController : Controller
         //     return RedirectToAction("Index");
         // }
 
-        // ModelState.AddModelError("Password", "Password and Confirm Password do not match.");
-        await _userRepository.Create(userModel, confirmPassword);
-
-        return View(userModel);
+        try
+        {
+            await _userRepository.Create(userModel, confirmPassword);
+            return RedirectToAction("Index");
+        }
+        catch (Exception ex)
+        {
+            // ModelState.AddModelError("Password", "Password and Confirm Password do not match.");
+            ModelState.AddModelError("", ex.Message);
+            return View(userModel);
+        }
     }
 
     // 
