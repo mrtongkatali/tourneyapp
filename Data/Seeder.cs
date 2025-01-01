@@ -2,7 +2,7 @@ namespace tourneyapp.Data
 {
     public class Seeder
     {
-        public static void SeedUsers(ApplicationContext context)
+        public static void SeedUsers(ApplicationDbContext context)
         {
             context.User
                 .AddRange(

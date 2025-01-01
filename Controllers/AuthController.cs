@@ -8,8 +8,8 @@ using tourneyapp.Models;
 namespace tourneyapp.Controllers;
 public class AuthController : Controller
 {
-    private readonly ApplicationContext _context;
-    public AuthController(ApplicationContext context)
+    private readonly ApplicationDbContext _context;
+    public AuthController(ApplicationDbContext context)
     {
         _context = context;
     }

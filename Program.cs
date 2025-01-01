@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using tourneyapp.Data; // Add this line to import the namespace where ApplicationDbContext is defined
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<ApplicationContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();
-var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
 if (args.Contains("seed:users"))
 {
