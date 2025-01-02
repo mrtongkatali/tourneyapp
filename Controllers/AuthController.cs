@@ -20,17 +20,19 @@ public class AuthController : Controller
 
     public IActionResult Login()
     {
+        ViewData["returnUrl"] = Request.Query["returnUrl"];
+    
         return View("login");
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Authenticate(string email, string password)
+    public async Task<IActionResult> Authenticate(string email, string password, string returnUrl)
     {
         try
         {
             var user = await _userRepository.Login(email, password);
-            return RedirectToAction("Index");
+            return Redirect(returnUrl ?? Url.Action("Index", "Home") ?? "/");
         }
         catch (Exception ex)
         {
