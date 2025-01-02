@@ -1,6 +1,5 @@
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using tourneyapp.Models;
 using tourneyapp.Repositories;
 
