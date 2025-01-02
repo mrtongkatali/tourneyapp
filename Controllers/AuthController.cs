@@ -1,5 +1,6 @@
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using tourneyapp.Models;
 using tourneyapp.Repositories;
 
@@ -15,12 +16,28 @@ public class AuthController : Controller
     // GET: /demo/
     public IActionResult Index()
     {
-        return View("login");
+        return RedirectToAction("Login"); 
     }
 
     public IActionResult Login()
     {
         return View("login");
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Authenticate(string email, string password)
+    {
+        try
+        {
+            var user = await _userRepository.Login(email, password);
+            return RedirectToAction("Index");
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", ex.Message);
+            return View("login");
+        }
     }
     
     public IActionResult Register()
@@ -29,21 +46,21 @@ public class AuthController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(User userModel, string confirmPassword)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RegisterNewAccount(User userModel, string confirmPassword)
     {
-        // if (ModelState.IsValid)
-        // {
-        //     return RedirectToAction("Index");
-        // }
-
         try
         {
+            if(!ModelState.IsValid)
+            {
+               return View(userModel); 
+            }
+    
             await _userRepository.Create(userModel, confirmPassword);
             return RedirectToAction("Index");
         }
         catch (Exception ex)
         {
-            // ModelState.AddModelError("Password", "Password and Confirm Password do not match.");
             ModelState.AddModelError("", ex.Message);
             return View(userModel);
         }
