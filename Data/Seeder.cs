@@ -11,14 +11,14 @@ namespace tourneyapp.Data
                         Email = "user1@demo.com",
                         FirstName = "One",
                         LastName = "User",
-                        Password = "password",
+                        Password = "$2a$11$xxSr0TbY8Z35dqCMe.mL3uZmwRys.n6ShpzMByo1PsmORKwgy0hZy",
                     },
                     new Models.User
                     {
                         Email = "user2@demo.com",
                         FirstName = "Two",
                         LastName = "User",
-                        Password = "password",
+                        Password = "$2a$11$xxSr0TbY8Z35dqCMe.mL3uZmwRys.n6ShpzMByo1PsmORKwgy0hZy",
                     }
                 );
 

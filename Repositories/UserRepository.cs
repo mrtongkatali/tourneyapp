@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using tourneyapp.Data;
 using tourneyapp.Helpers;
@@ -33,7 +35,7 @@ namespace tourneyapp.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task<User> Login(string email, string password)
+        public async Task<User> Authenticate(string email, string password)
         {
             var user = await _appDbContext.User.FirstOrDefaultAsync(u => u.Email == email);
 

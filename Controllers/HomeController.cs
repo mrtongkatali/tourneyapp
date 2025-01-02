@@ -5,7 +5,7 @@ using tourneyapp.Models;
 
 namespace tourneyapp.Controllers;
 
-// [Authorize]
+[Authorize]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -20,7 +20,7 @@ public class HomeController : Controller
         return View();
     }
 
-    // [AllowAnonymous]
+    [AllowAnonymous]
     public IActionResult Privacy()
     {
         return View();
@@ -29,6 +29,7 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        // return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return RedirectToAction("PageNotFound", "Error");
     }
 }

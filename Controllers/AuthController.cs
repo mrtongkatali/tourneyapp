@@ -1,4 +1,7 @@
+using System.Security.Claims;
 using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using tourneyapp.Models;
 using tourneyapp.Repositories;
@@ -31,7 +34,10 @@ public class AuthController : Controller
     {
         try
         {
-            var user = await _userRepository.Login(email, password);
+            var user = await _userRepository.Authenticate(email, password);
+
+            this.SignInUser(user);
+
             return Redirect(returnUrl ?? Url.Action("Index", "Home") ?? "/");
         }
         catch (Exception ex)
@@ -40,7 +46,7 @@ public class AuthController : Controller
             return View("login");
         }
     }
-    
+
     public IActionResult Register()
     {
         return View("register");
@@ -72,5 +78,19 @@ public class AuthController : Controller
     public string WelcomeWithParameters(string name, int count)
     {
         return HtmlEncoder.Default.Encode($"Hello {name}, number of times: {count}");
+    }
+
+    private async void SignInUser(User user)
+    {
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.Email),
+        };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
     }
 }
