@@ -55,12 +55,20 @@ namespace tourneyapp.Migrations
                         .HasColumnType("varchar(100)")
                         .HasColumnName("password");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("User");
+                    b.ToTable("users");
                 });
 #pragma warning restore 612, 618
         }

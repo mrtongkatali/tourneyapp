@@ -12,6 +12,7 @@ namespace tourneyapp.Data
                         FirstName = "One",
                         LastName = "User",
                         Password = "$2a$11$xxSr0TbY8Z35dqCMe.mL3uZmwRys.n6ShpzMByo1PsmORKwgy0hZy",
+                        Status = Models.UserStatus.ACTIVE,
                     },
                     new Models.User
                     {
@@ -19,6 +20,7 @@ namespace tourneyapp.Data
                         FirstName = "Two",
                         LastName = "User",
                         Password = "$2a$11$xxSr0TbY8Z35dqCMe.mL3uZmwRys.n6ShpzMByo1PsmORKwgy0hZy",
+                        Status = Models.UserStatus.ACTIVE,
                     }
                 );
 

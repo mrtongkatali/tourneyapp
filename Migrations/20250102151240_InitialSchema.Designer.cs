@@ -12,8 +12,8 @@ using tourneyapp.Data;
 namespace tourneyapp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250101165338_Initial")]
-    partial class Initial
+    [Migration("20250102151240_InitialSchema")]
+    partial class InitialSchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,12 +58,20 @@ namespace tourneyapp.Migrations
                         .HasColumnType("varchar(100)")
                         .HasColumnName("password");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("User");
+                    b.ToTable("users");
                 });
 #pragma warning restore 612, 618
         }

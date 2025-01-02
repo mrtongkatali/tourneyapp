@@ -1,9 +1,20 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tourneyapp.Models;
 
-public class User
+public enum UserStatus 
+{
+    [Description("Active")]
+    ACTIVE = 1,
+
+    [Description("Inactive")]
+    INACTIVE = 2,
+}
+
+[Table("users")]
+public class User : BaseEntity
 {
     [Key]
     [Column("id")]
@@ -25,7 +36,6 @@ public class User
     [Column("last_name", TypeName = "varchar(50)")]
     public string LastName { get; set; } = string.Empty;
 
-    [Column("created_at")]
-    [DataType(DataType.Date)]
-    public DateTime CreatedAt { get; set; }
+    [Column("status")]
+    public UserStatus Status { get; set; } = UserStatus.ACTIVE;
 }
