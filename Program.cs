@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using tourneyapp.Data;
 using tourneyapp.Repositories; // Add this line to import the namespace where ApplicationDbContext is defined
 
@@ -44,6 +45,13 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "node_modules")),
+    RequestPath = "/node_modules"
+});
 
 app.MapStaticAssets();
 

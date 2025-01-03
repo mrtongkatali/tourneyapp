@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    @* <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" /> *@
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-light">
     @RenderBody()
 </body>
+@* <script src="/node_modules/bootstrap/dist/"></script> *@
+@await RenderSectionAsync("Scripts", required: false)
 </html>
